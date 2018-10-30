@@ -11,6 +11,10 @@ const Container = styled.div`
 class Mountain extends Component {
     constructor(props) {
         super(props);
+        this.myElement = null;
+        this.myTween = null
+
+
         this.polylion_shapes = document.getElementsByTagName("polygon");
         this.polylion_staggerFrom = {
             scale: 0,
@@ -27,12 +31,12 @@ class Mountain extends Component {
     }
 
     componentDidMount() {
-        TweenMax.staggerFrom(this.polylion_shapes, 4, this.polylion_staggerFrom, 0.02);
+      this.myTween = TweenMax.staggerFrom(this.polylion_shapes, 4, this.polylion_staggerFrom, 0.02);
     }
 
     render() {
         return (
-            <Container>
+            <Container ref={div => this.myElement = div}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="5 640 1100 750" className="polymnt">
                     <title>winter-week</title>
                     <g id="poly">
