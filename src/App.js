@@ -29,7 +29,9 @@ class App extends Component {
                     <RegisterForm></RegisterForm>
                 </Wrapper>
             </FlexView>
-
+            <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.11.5/TweenMax.min.js"></script>
+            <script src= "https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+            <script src= "https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
         </BackgroundContainer>
     );
   }
