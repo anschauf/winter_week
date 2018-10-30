@@ -1,26 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import styled from 'styled-components';
+import FlexView from "react-flexview/lib/FlexView";
+import Titel from "./components/Titel";
+import Mountain from "./components/Mountain";
+import Infos from "./components/Infos";
+import RegisterForm from "./components/RegisterForm";
+
+const BackgroundContainer = styled.div`
+`;
+const Wrapper = styled.div`
+    width: 100%
+    max-width: 1000px;
+    background-color: #b7c9da;
+    padding: none
+`;
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+
+        <BackgroundContainer>
+            <FlexView column height={2000} hAlignContent='center' vAlignContent='top'>
+                <Wrapper>
+                    <Titel></Titel>
+                    <Mountain></Mountain>
+                    <Infos></Infos>
+                    <RegisterForm></RegisterForm>
+                </Wrapper>
+            </FlexView>
+
+        </BackgroundContainer>
     );
   }
 }
