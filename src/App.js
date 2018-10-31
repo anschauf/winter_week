@@ -13,7 +13,7 @@ const Wrapper = styled.div`
     width: 100%
     max-width: 1000px;
     background-color: #b7c9da;
-    padding: none
+    padding: none;
 `;
 
 class App extends Component {
@@ -29,9 +29,6 @@ class App extends Component {
                     <RegisterForm></RegisterForm>
                 </Wrapper>
             </FlexView>
-            <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.11.5/TweenMax.min.js"></script>
-            <script src= "https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-            <script src= "https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
         </BackgroundContainer>
     );
   }
