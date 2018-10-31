@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
+import {Titel1_White} from "../helpers/styling-texts";
 
 const Container = styled.div`
   width: 100%
@@ -7,13 +8,6 @@ const Container = styled.div`
   color: white;
   padding: 2rem;
   box-sizing: border-box;
-`;
-
-const Titel1 = styled.p`
-    font-size: 4rem;
-    color: white;
-    font-familiy: 'Impact'
-    font-weight: '700'
 `;
 
 const InputField = styled.div`
@@ -89,7 +83,7 @@ class Infos extends Component {
     render() {
         return (
             <Container>
-                <Titel1>Registration</Titel1>
+                <Titel1_White>Registration</Titel1_White>
                 <InputField>
                     <label>Prename: </label>
                     <TextInput onChange={e => this.handlePreNameChange(e)}/>

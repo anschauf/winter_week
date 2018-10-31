@@ -16,7 +16,9 @@ const Wrapper = styled.div`
     padding: none;
 `;
 
+
 class App extends Component {
+
   render() {
     return (
 

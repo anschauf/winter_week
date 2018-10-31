@@ -5,14 +5,14 @@ import TweenMax from "gsap/TweenMaxBase";
 
 const Container = styled.div`
   width: 100%
-  max-width: 1000px;
+  aspectRatio: 1/3
 `;
 
 class Mountain extends Component {
     constructor(props) {
         super(props);
         this.myElement = null;
-        this.myTween = null
+        this.myTween = null;
 
 
         this.polylion_shapes = document.getElementsByTagName("polygon");

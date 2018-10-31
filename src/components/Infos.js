@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
+import {Titel1_White} from "../helpers/styling-texts";
 
 const Container = styled.div`
   width: 100%
@@ -9,18 +10,12 @@ const Container = styled.div`
   box-sizing: border-box;
 `;
 
-const Titel1 = styled.p`
-    font-size: 4rem;
-    color: white;
-    font-familiy: 'Impact'
-    font-weight: '700'
-`;
 
 class Infos extends Component {
     render() {
         return (
             <Container>
-                <Titel1>Infos über Anère</Titel1>
+                <Titel1_White>Infos über Anzère</Titel1_White>
 
                 <p>Beschreibung Ski Ort</p>
                 <p>Datum</p>
