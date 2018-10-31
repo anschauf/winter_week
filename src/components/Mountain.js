@@ -2,11 +2,26 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import {Elastic} from "gsap/all";
 import TweenMax from "gsap/TweenMaxBase";
+import {Titel1_White, Titel2_White} from "../helpers/styling-texts";
 
 const Container = styled.div`
-  width: 100%
-  aspectRatio: 1/3
+  width: 100%;
+  position: relative;
+
 `;
+
+const DateField = styled.div`
+  width: 100%;
+  position: absolute;
+  top: 80%;
+  text-align: center;
+`;
+
+// const DateFieldText = styled.h2`
+//     width: 100%
+//     color: white;
+//     font-size: 4.0rem;
+// `;
 
 class Mountain extends Component {
     constructor(props) {
@@ -31,13 +46,13 @@ class Mountain extends Component {
     }
 
     componentDidMount() {
-      this.myTween = TweenMax.staggerFrom(this.polylion_shapes, 4, this.polylion_staggerFrom, 0.02);
+        this.myTween = TweenMax.staggerFrom(this.polylion_shapes, 4, this.polylion_staggerFrom, 0.02);
     }
 
     render() {
         return (
             <Container ref={div => this.myElement = div}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="5 640 1100 750" className="polymnt">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="5 640 1100 950" className="polymnt">
                     <title>winter-week</title>
                     <g id="poly">
                         <g>
@@ -445,6 +460,9 @@ class Mountain extends Component {
                                  style={{fill: "#6f7c94"}}/>
                     </g>
                 </svg>
+                <DateField>
+                    <Titel2_White>10.-16. February 2019</Titel2_White>
+                </DateField>
             </Container>
         )
     }

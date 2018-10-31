@@ -1,40 +1,52 @@
 import styled from "styled-components";
 
-export const Titel1_Darkblue = styled.h1`
+export const Titel1_Darkblue = styled.b`
     color: #202c3e;
-    font-familiy: 'Impact';
     font-weight: '900';
-    font-size: 5rem;
+    font-size: 11rem;
+    margin-block: none;
+    @media (max-width: 850px) {
+        font-size: 7rem;
+    }
     @media (max-width: 700px) {
-        font-size: 2.5rem;
+        font-size: 4rem;
     }
 `;
 
-export const Titel1_White = styled.h1`
+export const Titel1_White = styled.b`
     color: white;
     font-familiy: 'Impact';
-    font-weight: '900';
-    font-size: 5rem;
+    font-weight: '1200';
+    font-size: 13rem;
+    @media (max-width: 850px) {
+        font-size: 7rem;
+    }
     @media (max-width: 700px) {
-        font-size: 2.5rem;
+        font-size: 4rem;
     }
 `;
 
-export const Titel2_Darkblue = styled.h1`
+export const Titel2_Darkblue = styled.b`
     color: #202c3e;
     font-familiy: 'Impact';
     font-weight: '900';
     font-size: 4rem;
+    @media (max-width: 850px) {
+        font-size: 3.0rem;
+    }
     @media (max-width: 700px) {
         font-size: 1.5rem;
     }
 `;
 
-export const Titel2_White = styled.h1`
+export const Titel2_White = styled.b`
     color: white;
     font-familiy: 'Impact';
     font-weight: '900';
-    font-size: 2rem;
+    font-size: 4rem;
+    @media (max-width: 850px) {
+        font-size: 3.0rem;
+    }
     @media (max-width: 700px) {
         font-size: 1.5rem;
     }

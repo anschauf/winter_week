@@ -25,6 +25,12 @@ const TextInput = styled.input`
     }
 `;
 
+const FieldLabel = styled.label`
+    display: block;
+    padding-top: 1rem;
+`;
+
+
 const SelectField = styled.select`
     border: 2px solid #4f596b
     border-radius: 4px;
@@ -48,7 +54,8 @@ class Infos extends Component {
         this.state = {
             faculty: 'ICU',
             preName: '',
-            lastName: ''
+            lastName: '',
+            email: ''
         };
 
     }
@@ -57,14 +64,15 @@ class Infos extends Component {
     handleSubmit() {
         console.log(this.state.lastName);
         console.log(this.state.preName);
-        console.log(this.state.faculty)
+        console.log(this.state.faculty);
+        console.log(this.state.email)
     }
 
     handleLastNameChange(event) {
         this.setState({lastName: event.target.value})
     }
 
-    handlePreNameChange(event) {
+    handleFirstNameChange(event) {
         this.setState({preName: event.target.value})
     }
 
@@ -72,15 +80,21 @@ class Infos extends Component {
         this.setState({faculty: event.target.value})
     }
 
+    handleEmailChange(event) {
+        this.setState({email: event.target.value})
+    }
+
     render() {
         return (
             <Container>
                 <Titel2_White>Registration</Titel2_White>
-                <label>Firstname: </label>
-                <TextInput onChange={e => this.handlePreNameChange(e)}/>
-                <label>Lastname: </label>
+                <FieldLabel>Firstname: </FieldLabel>
+                <TextInput onChange={e => this.handleFirstNameChange(e)}/>
+                <FieldLabel>Lastname: </FieldLabel>
                 <TextInput onChange={e => this.handleLastNameChange(e)}/>
-                <label>Fachverein Member:</label>
+                <FieldLabel>Email address: </FieldLabel>
+                <TextInput onChange={e => this.handleEmailChange(e)}/>
+                <FieldLabel>Fachverein Member:</FieldLabel>
                 <br/>
                 <SelectField value={this.faculty} onChange={e => this.handleFacultyChange(e)}>
                     <option value='ICU'>ICU</option>
