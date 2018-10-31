@@ -24,7 +24,7 @@ class Mountain extends Component {
         };
         let polyNames = [];
         for (let i = 0; i < 133; i++) {
-            polyNames.push(eval('this.polyElement' + i));
+            polyNames.push(this['polyElement' + 1]);
         }
 
 
