@@ -23,7 +23,7 @@ class App extends Component {
     return (
 
         <BackgroundContainer>
-            <FlexView column height={2000} hAlignContent='center' vAlignContent='top'>
+            <FlexView column hAlignContent='center' vAlignContent='top'>
                 <Wrapper>
                     <Titel></Titel>
                     <Mountain></Mountain>

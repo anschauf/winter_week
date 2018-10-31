@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import {Titel1_White} from "../helpers/styling-texts";
+import {ClickButton, Titel1_White, Titel2_White} from "../helpers/styling-texts";
 
 const Container = styled.div`
   width: 100%
@@ -9,11 +9,6 @@ const Container = styled.div`
   padding: 2rem;
   box-sizing: border-box;
 `;
-
-const InputField = styled.div`
-    padding: 0.3rem;
-    font-size: 1.2rem
-`;
 const TextInput = styled.input`
     width: 100%;
     display: online-block;
@@ -21,32 +16,29 @@ const TextInput = styled.input`
     background-color: #7e8da8
     border: 2px solid #4f596b
     border-radius: 4px;
-    margin-top: 0.4rem
-    color: white
-    font-size: 1rem
+    margin-left: 0.3rem;
+    margin-top: 0.4rem;
+    color: white;
+    font-size: 1rem;
+    @media (max-width: 700px) {
+        font-size: 0.6rem;
+    }
 `;
 
 const SelectField = styled.select`
     border: 2px solid #4f596b
     border-radius: 4px;
+    margin-left: 0.3rem;
     margin-top: 0.4rem;
     padding: 0.5rem 0.5rem
     background-color: #7e8da8
     color: white
     font-size: 1rem
-    
+    @media (max-width: 700px) {
+        font-size: 0.6rem;
+    }
 `;
 
-const SubmitButton = styled.button`
-    color: #202c3e
-    font-size: 2rem
-    margin: 0.5rem
-    border-radius: 4px;
-    border: 2px solid #4f596b
-    background-color: white
-    padding: 0.5rem
-    min-width: 10rem
-`;
 
 class Infos extends Component {
 
@@ -83,25 +75,19 @@ class Infos extends Component {
     render() {
         return (
             <Container>
-                <Titel1_White>Registration</Titel1_White>
-                <InputField>
-                    <label>Prename: </label>
-                    <TextInput onChange={e => this.handlePreNameChange(e)}/>
-                </InputField>
-                <InputField>
-                    <label>Lastname: </label>
-                    <TextInput onChange={e => this.handleLastNameChange(e)}/>
-                </InputField>
-                <InputField>
-                    <label>Fachverein Member:</label>
-                    <br/>
-                    <SelectField value={this.faculty} onChange={e => this.handleFacultyChange(e)}>
-                        <option value='ICU'>ICU</option>
-                        <option value='FAPS'>FAPS</option>
-                        <option value='OTHER'>OTHER</option>
-                    </SelectField>
-                </InputField>
-                <SubmitButton onClick={() => this.handleSubmit()}>Submit</SubmitButton>
+                <Titel2_White>Registration</Titel2_White>
+                <label>Firstname: </label>
+                <TextInput onChange={e => this.handlePreNameChange(e)}/>
+                <label>Lastname: </label>
+                <TextInput onChange={e => this.handleLastNameChange(e)}/>
+                <label>Fachverein Member:</label>
+                <br/>
+                <SelectField value={this.faculty} onChange={e => this.handleFacultyChange(e)}>
+                    <option value='ICU'>ICU</option>
+                    <option value='FAPS'>FAPS</option>
+                    <option value='OTHER'>OTHER</option>
+                </SelectField><br/>
+                <ClickButton onClick={() => this.handleSubmit()}>Submit</ClickButton>
 
             </Container>
         )
