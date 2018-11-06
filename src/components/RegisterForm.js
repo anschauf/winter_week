@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import {ClickButton, Titel1_White, Titel2_White} from "../helpers/styling-texts";
+import * as firebase from 'firebase';
+
 
 const Container = styled.div`
   width: 100%
@@ -46,34 +48,70 @@ const SelectField = styled.select`
 `;
 
 
+// Initialize Firebase
+const config = {
+    apiKey: process.env.FIREBASE_API_KEY,
+    authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+    databaseURL: process.env.FIREBASE_DATABASE_URL,
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID
+};
+
+
 class Infos extends Component {
 
 
+    //TODO refactoring of firebase initialization
     constructor(props) {
         super(props);
+        firebase.initializeApp(config);
         this.state = {
+            registrationRef: firebase.database().ref('registration'),
+            registrationCountRef: firebase.database().ref().child("count"),
             faculty: 'ICU',
-            preName: '',
+            firstName: '',
             lastName: '',
             email: ''
         };
 
+        //TODO if count reached max --> show other view
+        let newRegisterCount =  this.state.registrationCountRef;
+        console.log(newRegisterCount);
+        newRegisterCount.once('value').then((snapshot) => {
+            console.log("COUNT: " + snapshot.val());
+        });
     }
+
 
 
     handleSubmit() {
         console.log(this.state.lastName);
-        console.log(this.state.preName);
+        console.log(this.state.firstName);
         console.log(this.state.faculty);
-        console.log(this.state.email)
+        console.log(this.state.email);
+
+        this.saveRegistration(this.state.lastName, this.state.firstName, this.state.faculty, this.state.email);
+        //TODO message if failure/success
     }
 
+    // Save registration to firebase
+    saveRegistration(lastName, firstName, faculty, email) {
+        let newRegistrationRef =  this.state.registrationRef.push();
+        console.log(newRegistrationRef.toString());
+        newRegistrationRef.set({
+            lastName: lastName,
+            firstName: firstName,
+            email: email,
+            faculty: faculty
+        });
+    }
     handleLastNameChange(event) {
         this.setState({lastName: event.target.value})
     }
 
     handleFirstNameChange(event) {
-        this.setState({preName: event.target.value})
+        this.setState({firstName: event.target.value})
     }
 
     handleFacultyChange(event) {
@@ -84,6 +122,7 @@ class Infos extends Component {
         this.setState({email: event.target.value})
     }
 
+    /** TODO validation! **/
     render() {
         return (
             <Container>
