@@ -19,6 +19,7 @@ const LoaderCointainer = styled.div`
     background-color: #6f7c94
     padding-top: 5rem;
     padding-bottom: 5rem;
+    margin-bottom: 10px;
 `;
 
 const TextInput = styled.input`
@@ -57,6 +58,14 @@ const SelectField = styled.select`
     }
 `;
 
+const RegistrationAlert = styled.div`
+    text-align: center;
+    padding: 10px;
+    background: ${props => props.theme.bg};
+    border-radius: 20px;
+    margin: 1rem;
+`;
+//background: #79c879;
 // Initialize Firebase
 const config = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -67,10 +76,11 @@ const config = {
     messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID
 };
 
+const ALERT_TIMEOUT = 4000;
+
 
 class Infos extends Component {
 
-    //TODO refactoring of firebase initialization
     constructor(props) {
         super(props);
 
@@ -85,15 +95,6 @@ class Infos extends Component {
             registerCount: 0,
             maxRegistration: 0
         };
-
-        // this.state.registrationRef.child('registerCount').once('value');
-        //TODO if count reached max --> show other view
-        // let newRegisterCount =  this.state.registrationRef.child('registerCount');
-        // console.log(newRegisterCount);
-        // newRegisterCount.once('value').then((snapshot) => {
-        //     console.log("COUNT: " + snapshot.val());
-        // });
-        //console.log(this.getMaxAndConductedRegistration())
     }
 
     async componentWillMount() {
@@ -101,16 +102,18 @@ class Infos extends Component {
         this.setState({
             registerCount: counts.registerCount,
             maxRegistration: counts.maxRegistration,
-            loading: false
+            loading: false,
+            showSuccessAlert: false,
+            showFailureAlert: false,
+            errorMessage: ''
         });
-
     }
 
     // gets the maxRegistration and the registrationCount from firebase
     async getMaxAndConductedRegistration() {
         const registerCount = (await this.state.registrationRef.child('registerCount').once('value')).val();
         const maxRegistration = (await
-        this.state.registrationRef.child('maxRegistration').once('value')).val();
+            this.state.registrationRef.child('maxRegistration').once('value')).val();
         return {
             registerCount: registerCount,
             maxRegistration: maxRegistration
@@ -118,25 +121,34 @@ class Infos extends Component {
     }
 
     handleSubmit() {
-        console.log(this.state.lastName);
-        console.log(this.state.firstName);
-        console.log(this.state.faculty);
-        console.log(this.state.email);
-
         this.saveRegistration(this.state.lastName, this.state.firstName, this.state.faculty, this.state.email);
-        //TODO message if failure/success
     }
 
-    // Save registration to firebase
+    // Save registration to firebase && trigger alert handling
     saveRegistration(lastName, firstName, faculty, email) {
         let newRegistrationRef = this.state.registrationRef.push();
-        console.log(newRegistrationRef.toString());
         newRegistrationRef.set({
             lastName: lastName,
             firstName: firstName,
             email: email,
             faculty: faculty
-        });
+        }).then(res => {
+            // show success alert
+            this.setState({successAlert: true});
+            // hide alert after timeout
+            setTimeout(() => {
+                this.setState({successAlert: false});
+            }, ALERT_TIMEOUT);
+        }).catch(err => {
+            this.setState({
+                failureAlert: false,
+                errorMessage: err
+            });
+            // hide alert after timeout
+            setTimeout(() => {
+                this.setState({failureAlert: false});
+            }, ALERT_TIMEOUT);
+        })
     }
 
     handleLastNameChange(event) {
@@ -170,6 +182,16 @@ class Infos extends Component {
             return (
                 <Container>
                     <Titel2_White>Registration</Titel2_White>
+                    {this.state.successAlert &&
+                        <RegistrationAlert id='successAlert' theme={{bg: '#79c879'}}>
+                            Your registration has succesfully been accepted!
+                        </RegistrationAlert>
+                    }
+                    {this.state.failureAlert &&
+                        <RegistrationAlert id='failureAlert' theme={{bg: '#f9343b'}}>
+                            Registration was not successful! ${this.state.errorMessage}
+                        </RegistrationAlert>
+                    }
                     <FieldLabel>Firstname: </FieldLabel>
                     <TextInput onChange={e => this.handleFirstNameChange(e)}/>
                     <FieldLabel>Lastname: </FieldLabel>
