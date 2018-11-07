@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import {ClickButton, Titel1_White, Titel2_White} from "../helpers/styling-texts";
 import * as firebase from 'firebase';
+import Loader from 'react-loader-spinner'
 
 
 const Container = styled.div`
@@ -11,6 +12,15 @@ const Container = styled.div`
   padding: 2rem;
   box-sizing: border-box;
 `;
+
+const LoaderCointainer = styled.div`
+    margin: auto;
+    width: 80px;
+    background-color: #6f7c94
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+`;
+
 const TextInput = styled.input`
     width: 100%;
     display: online-block;
@@ -47,7 +57,6 @@ const SelectField = styled.select`
     }
 `;
 
-
 // Initialize Firebase
 const config = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -61,7 +70,6 @@ const config = {
 
 class Infos extends Component {
 
-
     //TODO refactoring of firebase initialization
     constructor(props) {
         super(props);
@@ -69,21 +77,45 @@ class Infos extends Component {
         firebase.initializeApp(config);
         this.state = {
             registrationRef: firebase.database().ref('registration'),
+            loading: true,
             faculty: 'ICU',
             firstName: '',
             lastName: '',
-            email: ''
+            email: '',
+            registerCount: 0,
+            maxRegistration: 0
         };
 
+        // this.state.registrationRef.child('registerCount').once('value');
         //TODO if count reached max --> show other view
-        let newRegisterCount =  this.state.registrationRef.child('registerCount');
-        console.log(newRegisterCount);
-        newRegisterCount.once('value').then((snapshot) => {
-            console.log("COUNT: " + snapshot.val());
-        });
+        // let newRegisterCount =  this.state.registrationRef.child('registerCount');
+        // console.log(newRegisterCount);
+        // newRegisterCount.once('value').then((snapshot) => {
+        //     console.log("COUNT: " + snapshot.val());
+        // });
+        //console.log(this.getMaxAndConductedRegistration())
     }
 
+    async componentWillMount() {
+        let counts = await this.getMaxAndConductedRegistration();
+        this.setState({
+            registerCount: counts.registerCount,
+            maxRegistration: counts.maxRegistration,
+            loading: false
+        });
 
+    }
+
+    // gets the maxRegistration and the registrationCount from firebase
+    async getMaxAndConductedRegistration() {
+        const registerCount = (await this.state.registrationRef.child('registerCount').once('value')).val();
+        const maxRegistration = (await
+        this.state.registrationRef.child('maxRegistration').once('value')).val();
+        return {
+            registerCount: registerCount,
+            maxRegistration: maxRegistration
+        }
+    }
 
     handleSubmit() {
         console.log(this.state.lastName);
@@ -97,7 +129,7 @@ class Infos extends Component {
 
     // Save registration to firebase
     saveRegistration(lastName, firstName, faculty, email) {
-        let newRegistrationRef =  this.state.registrationRef.push();
+        let newRegistrationRef = this.state.registrationRef.push();
         console.log(newRegistrationRef.toString());
         newRegistrationRef.set({
             lastName: lastName,
@@ -106,6 +138,7 @@ class Infos extends Component {
             faculty: faculty
         });
     }
+
     handleLastNameChange(event) {
         this.setState({lastName: event.target.value})
     }
@@ -124,26 +157,36 @@ class Infos extends Component {
 
     /** TODO validation! **/
     render() {
-        return (
-            <Container>
-                <Titel2_White>Registration</Titel2_White>
-                <FieldLabel>Firstname: </FieldLabel>
-                <TextInput onChange={e => this.handleFirstNameChange(e)}/>
-                <FieldLabel>Lastname: </FieldLabel>
-                <TextInput onChange={e => this.handleLastNameChange(e)}/>
-                <FieldLabel>Email address: </FieldLabel>
-                <TextInput onChange={e => this.handleEmailChange(e)}/>
-                <FieldLabel>Fachverein Member:</FieldLabel>
-                <br/>
-                <SelectField value={this.faculty} onChange={e => this.handleFacultyChange(e)}>
-                    <option value='ICU'>ICU</option>
-                    <option value='FAPS'>FAPS</option>
-                    <option value='OTHER'>OTHER</option>
-                </SelectField><br/>
-                <ClickButton onClick={() => this.handleSubmit()}>Submit</ClickButton>
 
-            </Container>
-        )
+        if (this.state.loading) {
+            return (
+                <Container>
+                    <LoaderCointainer>
+                        <Loader type="Oval" color="white" height={80} width={80}/>
+                    </LoaderCointainer>
+                </Container>
+            )
+        } else {
+            return (
+                <Container>
+                    <Titel2_White>Registration</Titel2_White>
+                    <FieldLabel>Firstname: </FieldLabel>
+                    <TextInput onChange={e => this.handleFirstNameChange(e)}/>
+                    <FieldLabel>Lastname: </FieldLabel>
+                    <TextInput onChange={e => this.handleLastNameChange(e)}/>
+                    <FieldLabel>Email address: </FieldLabel>
+                    <TextInput onChange={e => this.handleEmailChange(e)}/>
+                    <FieldLabel>Fachverein Member:</FieldLabel>
+                    <br/>
+                    <SelectField value={this.faculty} onChange={e => this.handleFacultyChange(e)}>
+                        <option value='ICU'>ICU</option>
+                        <option value='FAPS'>FAPS</option>
+                        <option value='OTHER'>OTHER</option>
+                    </SelectField><br/>
+                    <ClickButton onClick={() => this.handleSubmit()}>Submit</ClickButton>
+                </Container>
+            )
+        }
     }
 }
 
