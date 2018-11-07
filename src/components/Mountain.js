@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import {Elastic} from "gsap/all";
 import TweenMax from "gsap/TweenMaxBase";
-import {Titel1_White, Titel2_White} from "../helpers/styling-texts";
+import {Titel2White} from "../helpers/styling-texts";
 
 const Container = styled.div`
   width: 100%;
@@ -461,7 +461,7 @@ class Mountain extends Component {
                     </g>
                 </svg>
                 <DateField>
-                    <Titel2_White>10.-16. February 2019</Titel2_White>
+                    <Titel2White>10.-16. February 2019</Titel2White>
                 </DateField>
             </Container>
         )

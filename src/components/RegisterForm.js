@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import {ClickButton, Titel2_White} from "../helpers/styling-texts";
+import {ClickButton, Titel2White} from "../helpers/styling-texts";
 import Loader from 'react-loader-spinner'
 import fireBaseService from '../firebase-service.js'
 
@@ -191,7 +191,7 @@ class Infos extends Component {
         } else {
             return (
                 <Container>
-                    <Titel2_White>Registration</Titel2_White>
+                    <Titel2White>Registration</Titel2White>
                     {this.state.successAlert &&
                     <RegistrationAlert id='successAlert' theme={{bg: '#79c879'}}>
                         Your registration has succesfully been accepted!

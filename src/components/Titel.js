@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import {Titel1_Darkblue, Titel1_White} from '../helpers/styling-texts';
+import {Titel1Darkblue, Titel1White} from '../helpers/styling-texts';
 
 const Container = styled.div`
   text-align: center;
@@ -28,11 +28,11 @@ class Titel extends Component {
         return (
             <Container>
                 <FirstLine>
-                <Titel1_Darkblue>Winter</Titel1_Darkblue>
+                <Titel1Darkblue>Winter</Titel1Darkblue>
                 <br/>
-                <Titel1_Darkblue>Week 19</Titel1_Darkblue>
+                <Titel1Darkblue>Week 19</Titel1Darkblue>
                 <br/>
-                <Titel1_White>anzère</Titel1_White>
+                <Titel1White>anzère</Titel1White>
                 </FirstLine>
             </Container>
         )

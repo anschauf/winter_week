@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Titel1_Darkblue = styled.b`
+export const Titel1Darkblue = styled.b`
     color: #202c3e;
     font-weight: '900';
     font-size: 11rem;
@@ -13,7 +13,7 @@ export const Titel1_Darkblue = styled.b`
     }
 `;
 
-export const Titel1_White = styled.b`
+export const Titel1White = styled.b`
     color: white;
     font-familiy: 'Impact';
     font-weight: '1200';
@@ -26,7 +26,7 @@ export const Titel1_White = styled.b`
     }
 `;
 
-export const Titel2_Darkblue = styled.b`
+export const Titel2Darkblue = styled.b`
     color: #202c3e;
     font-familiy: 'Impact';
     font-weight: '900';
@@ -39,7 +39,7 @@ export const Titel2_Darkblue = styled.b`
     }
 `;
 
-export const Titel2_White = styled.b`
+export const Titel2White = styled.b`
     color: white;
     font-familiy: 'Impact';
     font-weight: '900';
