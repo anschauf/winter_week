@@ -80,10 +80,13 @@ class Infos extends Component {
             loading: true,
             faculty: 'ICU',
             firstName: '',
+            firstNameError: "",
             lastName: '',
+            lastNameNameError: "",
             email: '',
             registerCount: 0,
-            maxRegistration: 0
+            maxRegistration: 0,
+            inputValid: false
         };
     }
 
@@ -100,13 +103,14 @@ class Infos extends Component {
     }
 
     async handleSubmit() {
+
         let res = await fireBaseService.saveRegistration(this.state.lastName, this.state.firstName, this.state.faculty, this.state.email);
         console.log("RESULT: " + res);
-        if(!res) {
+        if (!res) {
             this.showFailureAlert();
         } else {
             let countRes = await fireBaseService.increaseRegistrationCounter(this.state.registerCount);
-            if(!countRes) {
+            if (!countRes) {
                 this.showFailureAlert();
             } else {
                 this.setState({registerCount: (this.state.registerCount + 1)});
@@ -136,19 +140,41 @@ class Infos extends Component {
     }
 
     handleLastNameChange(event) {
-        this.setState({lastName: event.target.value})
+        this.setState({lastName: event.target.value});
+        this.handleInputValidity()
     }
 
     handleFirstNameChange(event) {
-        this.setState({firstName: event.target.value})
+        this.setState({firstName: event.target.value});
+        this.handleInputValidity()
     }
 
     handleFacultyChange(event) {
-        this.setState({faculty: event.target.value})
+        this.setState({faculty: event.target.value});
     }
 
     handleEmailChange(event) {
-        this.setState({email: event.target.value})
+        this.setState({email: event.target.value});
+        this.handleInputValidity()
+    }
+
+    handleInputValidity() {
+        if (!this.state.inputValid) {
+            if (this.isInputValid()) {
+                this.setState({inputValid: true})
+            }
+        } else {
+            if (!this.isInputValid()) {
+                this.setState({inputValid: false})
+            }
+        }
+    }
+
+    isInputValid() {
+        if (this.state.firstName.length <= 0) return false;
+        if (this.state.lastName.length <= 0) return false;
+        if (this.state.email.length <= 0 || !this.state.email.includes('@') || !this.state.email.includes('.')) return false;
+        return true
     }
 
     /** TODO validation! **/
@@ -191,7 +217,8 @@ class Infos extends Component {
                                 <option value='FAPS'>FAPS</option>
                                 <option value='OTHER'>OTHER</option>
                             </SelectField><br/>
-                            <ClickButton onClick={() => this.handleSubmit()}>Submit</ClickButton>
+                            <ClickButton onClick={() => this.handleSubmit()}
+                                         disabled={!this.state.inputValid}>Submit</ClickButton>
                         </div>
                     ) : (
                         <RegisterContainer>

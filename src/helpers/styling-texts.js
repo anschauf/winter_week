@@ -53,12 +53,12 @@ export const Titel2_White = styled.b`
 `;
 
 export const ClickButton = styled.button`
-    color: #202c3e
+    color: ${props => props.disabled ? '#d6d6d6' : '#202c3e'}
     font-size: 1.5rem;
     margin: 0.3rem;
     margin-top: 1rem
     border-radius: 4px;
-    border: 2px solid #4f596b
+    border: 2px solid ${props => props.disabled ? 'd6d6d6' : '#4f596b'}
     background-color: white
     padding: 0.5rem
     min-width: 10rem
