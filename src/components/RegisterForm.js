@@ -103,6 +103,7 @@ class Infos extends Component {
             datepickerIsOpen: false,
             startDate: moment("1994-01-01"),
             ticket: true,
+            vegetarian: false
         };
     }
 
@@ -124,7 +125,6 @@ class Infos extends Component {
     async handleSubmit() {
 
         let res = await fireBaseService.saveRegistration(this.state.lastName, this.state.firstName, this.state.faculty, this.state.email);
-        console.log("RESULT: " + res);
         if (!res) {
             this.showFailureAlert();
         } else {
@@ -199,9 +199,14 @@ class Infos extends Component {
             ticket: state
         });
     }
+
+    setVegetarian(state) {
+        this.setState({
+            vegetarian: state
+        })
+    }
     toggleCalendar(e) {
         e && e.preventDefault();
-        console.log(this.state.startDate);
         this.setState({datepickerIsOpen: !this.state.datepickerIsOpen})
     }
 
@@ -239,12 +244,23 @@ class Infos extends Component {
                     }
                     {(this.state.registerCount < this.state.maxRegistration) ? (
                         <div>
+                            {/*Firstname*/}
                             <FieldLabel>Firstname: </FieldLabel>
                             <TextInput onChange={e => this.handleFirstNameChange(e)}/>
+
+                            {/*Lastname*/}
                             <FieldLabel>Lastname: </FieldLabel>
                             <TextInput onChange={e => this.handleLastNameChange(e)}/>
+
+                            {/*Email address*/}
                             <FieldLabel>Email address: </FieldLabel>
                             <TextInput onChange={e => this.handleEmailChange(e)}/>
+
+                            {/*mobile number*/}
+                            <FieldLabel>mobile number (during the Winter week): </FieldLabel>
+                            <TextInput onChange={e => this.handleEmailChange(e)}/>
+
+                            {/*Faculty*/}
                             <FieldLabel>Fachverein Member:</FieldLabel>
                             <br/>
                             <SelectField value={this.faculty} onChange={e => this.handleFacultyChange(e)}>
@@ -252,6 +268,9 @@ class Infos extends Component {
                                 <option value='FAPS'>FAPS</option>
                                 <option value='OTHER'>OTHER</option>
                             </SelectField><br/>
+
+
+                            {/*Date of birth*/}
                             <FieldLabel>Date of birth:</FieldLabel>
                             <NormalButton
                                 className="example-custom-input"
@@ -275,6 +294,8 @@ class Infos extends Component {
                                 )
                             }
                             <br/>
+
+                            {/*Skiticket*/}
                             <FieldLabel>Do you need a Skiticket?:</FieldLabel>
                             <RadioButtonContainer>
                             <RadiobuttonLabel>
@@ -287,6 +308,19 @@ class Infos extends Component {
                             </RadiobuttonLabel>
                             </RadioButtonContainer>
                             <br/>
+
+                            {/*Vegetarian*/}
+                            <FieldLabel>Are you vegetarian?:</FieldLabel>
+                            <RadioButtonContainer>
+                                <RadiobuttonLabel>
+                                    <input type="radio" name="vegetarian" value="yes" onChange={() => this.setVegetarian(true)} checked={this.state.vegetarian}/>
+                                    Yes
+                                </RadiobuttonLabel>
+                                <RadiobuttonLabel>
+                                    <input type="radio" name="vegetarian" value="no" onChange={() => this.setVegetarian(false)} checked={!this.state.vegetarian}/>
+                                    No
+                                </RadiobuttonLabel>
+                            </RadioButtonContainer>
                             <ClickButton onClick={() => this.handleSubmit()}
                                          disabled={!this.state.inputValid}>Submit</ClickButton>
                         </div>
