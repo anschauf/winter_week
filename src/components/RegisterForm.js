@@ -72,6 +72,16 @@ const RegistrationAlert = styled.div`
     margin: 1rem;
 `;
 
+const RadioButtonContainer = styled.div`
+    margin-top:     .5rem;
+`;
+const RadiobuttonLabel = styled.label`
+    margin: .5rem;
+    
+`;
+
+
+
 const ALERT_TIMEOUT = 4000;
 
 
@@ -92,6 +102,7 @@ class Infos extends Component {
             inputValid: false,
             datepickerIsOpen: false,
             startDate: moment("1994-01-01"),
+            ticket: true,
         };
     }
 
@@ -183,6 +194,11 @@ class Infos extends Component {
         this.toggleCalendar()
     }
 
+    setTicket(state) {
+        this.setState({
+            ticket: state
+        });
+    }
     toggleCalendar(e) {
         e && e.preventDefault();
         console.log(this.state.startDate);
@@ -258,6 +274,18 @@ class Infos extends Component {
                                     />
                                 )
                             }
+                            <br/>
+                            <FieldLabel>Do you need a Skiticket?:</FieldLabel>
+                            <RadioButtonContainer>
+                            <RadiobuttonLabel>
+                                <input type="radio" name="ticket" value="yes" onChange={() => this.setTicket(true)} checked={this.state.ticket}/>
+                                Yes
+                            </RadiobuttonLabel>
+                            <RadiobuttonLabel>
+                                <input type="radio" name="ticket" value="no" onChange={() => this.setTicket(false)} checked={!this.state.ticket}/>
+                                No
+                            </RadiobuttonLabel>
+                            </RadioButtonContainer>
                             <br/>
                             <ClickButton onClick={() => this.handleSubmit()}
                                          disabled={!this.state.inputValid}>Submit</ClickButton>
