@@ -6,6 +6,7 @@ import fireBaseService from '../firebase-service.js';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
+import core from '../helpers/core-functions.js'
 
 const Container = styled.div`
   width: 100%
@@ -97,11 +98,12 @@ class Infos extends Component {
             lastName: '',
             lastNameNameError: "",
             email: '',
+            phonenumber: '',
             registerCount: 0,
             maxRegistration: 0,
             inputValid: false,
             datepickerIsOpen: false,
-            startDate: moment("1994-01-01"),
+            birthday: moment("1994-01-01"),
             ticket: true,
             vegetarian: false
         };
@@ -118,25 +120,10 @@ class Infos extends Component {
             showFailureAlert: false,
             // inputValid: false,
             // datepickerIsOpen: false,
-            // startDate: moment(),
+            // birthday: moment(),
         });
     }
 
-    async handleSubmit() {
-
-        let res = await fireBaseService.saveRegistration(this.state.lastName, this.state.firstName, this.state.faculty, this.state.email);
-        if (!res) {
-            this.showFailureAlert();
-        } else {
-            let countRes = await fireBaseService.increaseRegistrationCounter(this.state.registerCount);
-            if (!countRes) {
-                this.showFailureAlert();
-            } else {
-                this.setState({registerCount: (this.state.registerCount + 1)});
-                this.showSuccessAlert();
-            }
-        }
-    }
 
     showSuccessAlert() {
         this.setState({
@@ -177,6 +164,11 @@ class Infos extends Component {
         this.handleInputValidity()
     }
 
+    handlePhoneNumberChange(event) {
+        this.setState({phoneNumber: event.target.value});
+        this.handleInputValidity()
+    }
+
     handleInputValidity() {
         if (!this.state.inputValid) {
             if (this.isInputValid()) {
@@ -190,7 +182,7 @@ class Infos extends Component {
     }
 
     handleDateChange(date) {
-        this.setState({startDate: date});
+        this.setState({birthday: date});
         this.toggleCalendar()
     }
 
@@ -211,10 +203,28 @@ class Infos extends Component {
     }
 
     isInputValid() {
-        if (this.state.firstName.length <= 0) return false;
-        if (this.state.lastName.length <= 0) return false;
-        if (this.state.email.length <= 0 || !this.state.email.includes('@') || !this.state.email.includes('.')) return false;
+        if (!core.isNotEmpty(this.state.firstName)) return false;
+        if (!core.isNotEmpty(this.state.lastName.length)) return false;
+        if (!core.isNotEmpty(this.state.email.length) || !core.isEmailAddress(this.state.email)) return false;
+        if(!core.isNumber(this.state.phoneNumber) || this.state.phoneNumber.length < 8) return false;
         return true
+    }
+
+
+    async handleSubmit() {
+        let res = await fireBaseService.saveRegistration(this.state.lastName, this.state.firstName, this.state.faculty, this.state.email,
+            this.state.phoneNumber, this.state.ticket, this.state.vegetarian, this.state.birthday.format('YYYY/MM/DD'));
+        if (!res) {
+            this.showFailureAlert();
+        } else {
+            let countRes = await fireBaseService.increaseRegistrationCounter(this.state.registerCount);
+            if (!countRes) {
+                this.showFailureAlert();
+            } else {
+                this.setState({registerCount: (this.state.registerCount + 1)});
+                this.showSuccessAlert();
+            }
+        }
     }
 
     /** TODO validation! **/
@@ -258,7 +268,7 @@ class Infos extends Component {
 
                             {/*mobile number*/}
                             <FieldLabel>mobile number (during the Winter week): </FieldLabel>
-                            <TextInput onChange={e => this.handleEmailChange(e)}/>
+                            <TextInput onChange={e => this.handlePhoneNumberChange(e)}/>
 
                             {/*Faculty*/}
                             <FieldLabel>Fachverein Member:</FieldLabel>
@@ -275,12 +285,12 @@ class Infos extends Component {
                             <NormalButton
                                 className="example-custom-input"
                                 onClick={this.toggleCalendar.bind(this)}>
-                                {this.state.startDate.format("DD MMMM YYYY")}
+                                {this.state.birthday.format("DD MMMM YYYY")}
                             </NormalButton>
                             {
                                 this.state.datepickerIsOpen && (
                                     <DatePicker
-                                        selected={this.state.startDate}
+                                        selected={this.state.birthday}
                                         onChange={this.handleDateChange.bind(this)}
                                         peekNextMonth
                                         showMonthDropdown

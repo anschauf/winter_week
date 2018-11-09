@@ -24,13 +24,18 @@ export default {
         }
     },
 
-    async saveRegistration(_lastName, _firstName, _faculty, _email) {
+    async saveRegistration(_lastName, _firstName, _faculty, _email,
+                           _phonenumber, _ticket, _vegetarian, _birhtday) {
         let newRegistrationRef = registrationRef.push();
         return newRegistrationRef.set({
             lastName: _lastName,
             firstName: _firstName,
             email: _email,
-            faculty: _faculty
+            faculty: _faculty,
+            phonenumber: _phonenumber,
+            ticket: _ticket,
+            vegetarian: _vegetarian,
+            birthday: _birhtday
         }).then(res => {
             return true;
         }).catch(err => {
