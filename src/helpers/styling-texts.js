@@ -66,3 +66,18 @@ export const ClickButton = styled.button`
         font-size: 0.8rem;
     }
 `;
+
+export const NormalButton = styled.button`
+    color: white
+    font-size: 1.1rem;
+    margin: 0.3rem;
+    margin-top: 1rem
+    border-radius: 4px;
+    border: 2px solid ${props => props.disabled ? 'd6d6d6' : '#4f596b'}
+    background-color: #7e8da8
+    padding: 0.2rem
+    min-width: 10rem
+        @media (max-width: 700px) {
+        font-size: 0.8rem;
+    }
+`;

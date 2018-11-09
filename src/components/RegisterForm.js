@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import {ClickButton, Titel2White} from "../helpers/styling-texts";
-import Loader from 'react-loader-spinner'
-import fireBaseService from '../firebase-service.js'
+import {ClickButton, NormalButton, Titel2White} from "../helpers/styling-texts";
+import Loader from 'react-loader-spinner';
+import fireBaseService from '../firebase-service.js';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from 'moment';
 
 const Container = styled.div`
   width: 100%
@@ -86,7 +89,9 @@ class Infos extends Component {
             email: '',
             registerCount: 0,
             maxRegistration: 0,
-            inputValid: false
+            inputValid: false,
+            datepickerIsOpen: false,
+            startDate: moment("1994-01-01"),
         };
     }
 
@@ -99,6 +104,9 @@ class Infos extends Component {
             loading: false,
             showSuccessAlert: false,
             showFailureAlert: false,
+            // inputValid: false,
+            // datepickerIsOpen: false,
+            // startDate: moment(),
         });
     }
 
@@ -170,6 +178,17 @@ class Infos extends Component {
         }
     }
 
+    handleDateChange(date) {
+        this.setState({startDate: date});
+        this.toggleCalendar()
+    }
+
+    toggleCalendar(e) {
+        e && e.preventDefault();
+        console.log(this.state.startDate);
+        this.setState({datepickerIsOpen: !this.state.datepickerIsOpen})
+    }
+
     isInputValid() {
         if (this.state.firstName.length <= 0) return false;
         if (this.state.lastName.length <= 0) return false;
@@ -217,6 +236,29 @@ class Infos extends Component {
                                 <option value='FAPS'>FAPS</option>
                                 <option value='OTHER'>OTHER</option>
                             </SelectField><br/>
+                            <FieldLabel>Date of birth:</FieldLabel>
+                            <NormalButton
+                                className="example-custom-input"
+                                onClick={this.toggleCalendar.bind(this)}>
+                                {this.state.startDate.format("DD MMMM YYYY")}
+                            </NormalButton>
+                            {
+                                this.state.datepickerIsOpen && (
+                                    <DatePicker
+                                        selected={this.state.startDate}
+                                        onChange={this.handleDateChange.bind(this)}
+                                        peekNextMonth
+                                        showMonthDropdown
+                                        showYearDropdown
+                                        dropdownMode="select"
+                                        withPortal
+                                        inline
+                                        minDate={moment('1980-01-01')}
+                                        maxDate={moment('2006-12-31')}
+                                    />
+                                )
+                            }
+                            <br/>
                             <ClickButton onClick={() => this.handleSubmit()}
                                          disabled={!this.state.inputValid}>Submit</ClickButton>
                         </div>
