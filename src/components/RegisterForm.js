@@ -30,7 +30,8 @@ const LoaderCointainer = styled.div`
 
 
 const TextInput = styled.input`
-    width: 100%;
+    width: 80%;
+    align: center;
     display: online-block;
     padding: 0.5rem 0.5rem
     background-color: #7e8da8
@@ -47,7 +48,7 @@ const TextInput = styled.input`
 
 const FieldLabel = styled.label`
     display: block;
-    padding-top: 1rem;
+    padding-top: 0.5rem;
 `;
 
 
@@ -74,13 +75,11 @@ const RegistrationAlert = styled.div`
 `;
 
 const RadioButtonContainer = styled.div`
-    margin-top:     .5rem;
+    margin-top:     .2rem;
 `;
 const RadiobuttonLabel = styled.label`
-    margin: .5rem;
-    
+    margin: 0 .5rem 0 .5rem   
 `;
-
 
 
 const ALERT_TIMEOUT = 4000;
@@ -91,21 +90,22 @@ class Infos extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: true,
-            faculty: 'ICU',
-            firstName: '',
-            firstNameError: "",
-            lastName: '',
-            lastNameNameError: "",
-            email: '',
-            phonenumber: '',
+            profile: {
+                firstName: '',
+                lastName: '',
+                email: '',
+                phone: '',
+                faculty: 'ICU',
+                birthday: moment("1994-01-01"),
+                ticket: true,
+                vegetarian: false
+            },
             registerCount: 0,
             maxRegistration: 0,
             inputValid: false,
             datepickerIsOpen: false,
-            birthday: moment("1994-01-01"),
-            ticket: true,
-            vegetarian: false
+            showSuccessAlert: false,
+            showFailureAlert: false,
         };
     }
 
@@ -114,13 +114,7 @@ class Infos extends Component {
         this.setState({
             registerCount: counts.registerCount,
             maxRegistration: counts.maxRegistration,
-            //maxRegistration: 0,
             loading: false,
-            showSuccessAlert: false,
-            showFailureAlert: false,
-            // inputValid: false,
-            // datepickerIsOpen: false,
-            // birthday: moment(),
         });
     }
 
@@ -146,26 +140,26 @@ class Infos extends Component {
     }
 
     handleLastNameChange(event) {
-        this.setState({lastName: event.target.value});
+        this.setState({profile: {...this.state.profile, lastName: event.target.value}});
         this.handleInputValidity()
     }
 
     handleFirstNameChange(event) {
-        this.setState({firstName: event.target.value});
+        this.setState({profile: {...this.state.profile, firstName: event.target.value}});
         this.handleInputValidity()
     }
 
     handleFacultyChange(event) {
-        this.setState({faculty: event.target.value});
+        this.setState({profile: {...this.state.profile, faculty: event.target.value}});
     }
 
     handleEmailChange(event) {
-        this.setState({email: event.target.value});
+        this.setState({profile: {...this.state.profile, email: event.target.value}});
         this.handleInputValidity()
     }
 
     handlePhoneNumberChange(event) {
-        this.setState({phoneNumber: event.target.value});
+        this.setState({profile: {...this.state.profile, phone: event.target.value}});
         this.handleInputValidity()
     }
 
@@ -182,19 +176,19 @@ class Infos extends Component {
     }
 
     handleDateChange(date) {
-        this.setState({birthday: date});
+        this.setState({profile:{...this.state.profile, birthday: date}});
         this.toggleCalendar()
     }
 
     setTicket(state) {
         this.setState({
-            ticket: state
+            profile:{...this.state.profile, ticket: state}
         });
     }
 
     setVegetarian(state) {
         this.setState({
-            vegetarian: state
+            profile:{...this.state.profile, vegetarian: state}
         })
     }
     toggleCalendar(e) {
@@ -203,17 +197,15 @@ class Infos extends Component {
     }
 
     isInputValid() {
-        if (!core.isNotEmpty(this.state.firstName)) return false;
-        if (!core.isNotEmpty(this.state.lastName.length)) return false;
-        if (!core.isNotEmpty(this.state.email.length) || !core.isEmailAddress(this.state.email)) return false;
-        if(!core.isNumber(this.state.phoneNumber) || this.state.phoneNumber.length < 8) return false;
+        if (!core.isNotEmpty(this.state.profile.firstName)) return false;
+        if (!core.isNotEmpty(this.state.profile.lastName.length)) return false;
+        if (!core.isNotEmpty(this.state.profile.email.length) || !core.isEmailAddress(this.state.profile.email)) return false;
+        if(!core.isNumber(this.state.profile.phone) || this.state.profile.phone.length < 8) return false;
         return true
     }
 
-
     async handleSubmit() {
-        let res = await fireBaseService.saveRegistration(this.state.lastName, this.state.firstName, this.state.faculty, this.state.email,
-            this.state.phoneNumber, this.state.ticket, this.state.vegetarian, this.state.birthday.format('YYYY/MM/DD'));
+        let res = await fireBaseService.saveRegistration(this.state.profile);
         if (!res) {
             this.showFailureAlert();
         } else {
@@ -227,7 +219,6 @@ class Infos extends Component {
         }
     }
 
-    /** TODO validation! **/
     render() {
 
         if (this.state.loading) {
@@ -273,7 +264,7 @@ class Infos extends Component {
                             {/*Faculty*/}
                             <FieldLabel>Fachverein Member:</FieldLabel>
                             <br/>
-                            <SelectField value={this.faculty} onChange={e => this.handleFacultyChange(e)}>
+                            <SelectField value={this.state.profile.faculty} onChange={e => this.handleFacultyChange(e)}>
                                 <option value='ICU'>ICU</option>
                                 <option value='FAPS'>FAPS</option>
                                 <option value='OTHER'>OTHER</option>
@@ -285,12 +276,12 @@ class Infos extends Component {
                             <NormalButton
                                 className="example-custom-input"
                                 onClick={this.toggleCalendar.bind(this)}>
-                                {this.state.birthday.format("DD MMMM YYYY")}
+                                {this.state.profile.birthday.format("DD MMMM YYYY")}
                             </NormalButton>
                             {
                                 this.state.datepickerIsOpen && (
                                     <DatePicker
-                                        selected={this.state.birthday}
+                                        selected={this.state.profile.birthday}
                                         onChange={this.handleDateChange.bind(this)}
                                         peekNextMonth
                                         showMonthDropdown
@@ -309,25 +300,24 @@ class Infos extends Component {
                             <FieldLabel>Do you need a Skiticket?:</FieldLabel>
                             <RadioButtonContainer>
                             <RadiobuttonLabel>
-                                <input type="radio" name="ticket" value="yes" onChange={() => this.setTicket(true)} checked={this.state.ticket}/>
+                                <input type="radio" name="ticket" value="yes" onChange={() => this.setTicket(true)} checked={this.state.profile.ticket}/>
                                 Yes
                             </RadiobuttonLabel>
                             <RadiobuttonLabel>
-                                <input type="radio" name="ticket" value="no" onChange={() => this.setTicket(false)} checked={!this.state.ticket}/>
+                                <input type="radio" name="ticket" value="no" onChange={() => this.setTicket(false)} checked={!this.state.profile.ticket}/>
                                 No
                             </RadiobuttonLabel>
                             </RadioButtonContainer>
                             <br/>
-
                             {/*Vegetarian*/}
                             <FieldLabel>Are you vegetarian?:</FieldLabel>
                             <RadioButtonContainer>
                                 <RadiobuttonLabel>
-                                    <input type="radio" name="vegetarian" value="yes" onChange={() => this.setVegetarian(true)} checked={this.state.vegetarian}/>
+                                    <input type="radio" name="vegetarian" value="yes" onChange={() => this.setVegetarian(true)} checked={this.state.profile.vegetarian}/>
                                     Yes
                                 </RadiobuttonLabel>
                                 <RadiobuttonLabel>
-                                    <input type="radio" name="vegetarian" value="no" onChange={() => this.setVegetarian(false)} checked={!this.state.vegetarian}/>
+                                    <input type="radio" name="vegetarian" value="no" onChange={() => this.setVegetarian(false)} checked={!this.state.profile.vegetarian}/>
                                     No
                                 </RadiobuttonLabel>
                             </RadioButtonContainer>
