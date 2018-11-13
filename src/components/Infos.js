@@ -27,8 +27,9 @@ class Infos extends Component {
                     WICHTIG: Möchtest du nicht mit dem Car mit uns reisen, dann schreibe uns doch bitte nach deiner Anmeldung eine Email. Für die Anreise und/oder Rückreise bist du dann selber zuständig.</il>
                     <il>Köstliche Mahlzeiten (Frühstücksbuffet morgens und 2-3 Gang-Menü abends). Dieses Jahr wieder mit eigener Küche.
                     Fürs Mittagessen werdet ihr Gelegenheit haben Sandwiches zu machen.
-                    Selbstverständlich gibt es auch im Skigebiet mehrere Restaurants.
+                        Selbstverständlich gibt es auch im Skigebiet mehrere Restaurants.</il>
                     <il>Much fun, very wow</il>
+                </ul>
                    
                 <p>Das Kleingedruckte:</p>
                 <ul>
@@ -44,13 +45,14 @@ class Infos extends Component {
                     <il>Ski- / Snowboard-Ausrüstung organisieren ist Aufgabe der Teilnehmer.</il>
                     <il>Wir bitten euch, die Kosten für die Lagerteilnahme bis 5 Tage nach dem Erhalt der Bestätigung zu bezahlen.</il>
                     <il>Ohne triftigen Grund gibt es keine Rückerstattung der Kosten. (Mündliche Prüfungen oder Ähnliches zählen nicht als Grund.)</il>
-                    Es kann grundsätzlich nicht mit einer Rückerstattung gerechnet werden.</il>
+                    <il>Es kann grundsätzlich nicht mit einer Rückerstattung gerechnet werden.</il>
                     <il>Grundsätzlich haben ICU/FAPS Mitglieder Vorrang, deshalb ist die Anmeldung für Externe erst zwei Wochen nach Anmeldunganfang möglich.</il>
 
                     <il>Versicherung ist Sache der Teilnehmer.</il>
                     <il>Alle Angaben ohne Gewähr</il>
                 </ul>
             </Container>
+        )
     }
 }
 
