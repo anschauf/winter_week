@@ -17,31 +17,28 @@ class Infos extends Component {
             <Container>
                 <Titel2White>Allgemeine Informationen</Titel2White>
 
-                <p>Vom 10. bis 16. Februar 2019 reisen alle Wintersportverrückten nach <a href="https://www.anzere.ch">Anzère</a>!
-                   Nebst toller Unterkunft und schönem Skigebiet erwarten euch wie immer Flämmli und Werwölfe ;‑)</p>
-                <p>Imbegriffen:</p>
+                <p>From 10th to 16th February 2019 we are packing our skis and snowboards and are headed to <a href="https://www.anzere.ch">Anzère</a> for an exiting Winter Week!
+                   Next to an awesome accomodation and nice ski slopes, Flämmli and Werwölfe are also waiting for you, like always! ;‑)</p>
+                <p>Included:</p>
                 <ul>
-                    <il>Unterkunft in der Gruppenunterkunft im <a href="http://www.anzere-vacances.ch/groupes">Hotel Zodiaque</a> in Anzère</il>
-                    <il>Ski Ticket "Anzère" (für 5 Tage)</il>
-                    <il>Reise mit Car (Hin- und Rückreise ab/bis Zürich)
-                    WICHTIG: Möchtest du nicht mit dem Car mit uns reisen, dann schreibe uns doch bitte nach deiner Anmeldung eine Email. Für die Anreise und/oder Rückreise bist du dann selber zuständig.</il>
-                    <il>Köstliche Mahlzeiten (Frühstücksbuffet morgens und 2-3 Gang-Menü abends). Dieses Jahr wieder mit eigener Küche.
-                    Fürs Mittagessen werdet ihr Gelegenheit haben Sandwiches zu machen.
-                        Selbstverständlich gibt es auch im Skigebiet mehrere Restaurants.</il>
+                    <il>Accomodation in the group lodging of the <a href="http://www.anzere-vacances.ch/groupes">Hotel Zodiaque</a> in Anzère right at the bottom of the ski slope</il>
+                    <il>Ski Ticket "Anzère"  for 7 days</il>
+                    <il>Journey by Bus from and to Zurich</il>
+                    <il>Nourishous breakfast, delicious dinners and the opportunity to make sandwiches for lunch</il>
                     <il>Much fun, very wow</il>
                 </ul>
                    
-                <p>Das Kleingedruckte:</p>
+                <p>The fine print:</p>
                 <ul>
-                    <il>Mit Deiner Anmeldung meldest du dich für eine ganze Woche an und bezahlst auch den entsprechenden Preis.  Leider können wir keine Halbwochen-Aufenthalte, bzw. einzelne Tage anbieten.</il>
-                    <il>Skiticket:
+                    <il>With your registration, you register for the entire week and pay the price accordingly. We are not providing the option of joining for half or individual days of the Winter Week</il>
+                    <il>Ski ticket:
                         <ul>
-                            <il>Das Skiticket ist im Preis inbegriffen und ist gültig für 5 Tage.</il>
-                            <il>Das Skiticket ist NICHT übertragbar!</il>
-                            <il>Falls du kein Skiticket möchtest, kannst du das bei der Anmeldung auswählen.</il>
+                            <il>The ticket is included in the price and it is valid for 7 days, which includes the day of the arrival and departure.</il>
+                            <il>It is NOT transferable</il>
+                            <il>If you do not wish to have a ticket, you can indicate this in your registration.</il>
                         </ul>
                     </il>
-                    <il>Wer teilnimmt, ist hilfsbereit und steht unserem netten OK zur Seite.</il>
+                    <il>If you join the Winter Week, you will help out the organizing committee and kitchen team when needed.</il>
                     <il>Ski- / Snowboard-Ausrüstung organisieren ist Aufgabe der Teilnehmer.</il>
                     <il>Wir bitten euch, die Kosten für die Lagerteilnahme bis 5 Tage nach dem Erhalt der Bestätigung zu bezahlen.</il>
                     <il>Ohne triftigen Grund gibt es keine Rückerstattung der Kosten. (Mündliche Prüfungen oder Ähnliches zählen nicht als Grund.)</il>
