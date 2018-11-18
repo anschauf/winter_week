@@ -18,13 +18,13 @@ class Infos extends Component {
                 <Titel2White>Allgemeine Informationen</Titel2White>
 
                 <p>From 10th to 16th February 2019 we are packing our skis and snowboards and are headed to <a href="https://www.anzere.ch">Anzère</a> for an exiting Winter Week!
-                   Next to an awesome accomodation and nice ski slopes, Flämmli and Werwölfe are also waiting for you, like always! ;‑)</p>
+                   Next to an awesome accommodation and nice ski slopes, Flämmli and Werwölfe are also waiting for you, like always! ;‑)</p>
                 <p>Included:</p>
                 <ul>
-                    <il>Accomodation in the group lodging of the <a href="http://www.anzere-vacances.ch/groupes">Hotel Zodiaque</a> in Anzère right at the bottom of the ski slope</il>
+                    <il>Accommodation in the group lodging of the <a href="http://www.anzere-vacances.ch/groupes">Hotel Zodiaque</a> in Anzère right at the bottom of the ski slope</il>
                     <il>Ski Ticket "Anzère"  for 7 days</il>
                     <il>Journey by Bus from and to Zurich</il>
-                    <il>Nourishous breakfast, delicious dinners and the opportunity to make sandwiches for lunch</il>
+                    <il>Nourishing breakfast, delicious dinners and the opportunity to make sandwiches for lunch</il>
                     <il>Much fun, very wow</il>
                 </ul>
                    
@@ -39,14 +39,12 @@ class Infos extends Component {
                         </ul>
                     </il>
                     <il>If you join the Winter Week, you will help out the organizing committee and kitchen team when needed.</il>
-                    <il>Ski- / Snowboard-Ausrüstung organisieren ist Aufgabe der Teilnehmer.</il>
-                    <il>Wir bitten euch, die Kosten für die Lagerteilnahme bis 5 Tage nach dem Erhalt der Bestätigung zu bezahlen.</il>
-                    <il>Ohne triftigen Grund gibt es keine Rückerstattung der Kosten. (Mündliche Prüfungen oder Ähnliches zählen nicht als Grund.)</il>
-                    <il>Es kann grundsätzlich nicht mit einer Rückerstattung gerechnet werden.</il>
-                    <il>Grundsätzlich haben ICU/FAPS Mitglieder Vorrang, deshalb ist die Anmeldung für Externe erst zwei Wochen nach Anmeldunganfang möglich.</il>
+                    <il>Every participant is takes care of their own skiing or snowboarding equipment.</il>
+                    <il>We ask you to pay the required fees, latest 5 days after receiving the confirmation of your registration.</il>
+                    <il>In general, you should not count on getting a refund unless you have an extremely good reason in not being able to attend. Exams are not a good reason, since you should know this in advance.</il>
+                    <il>In general, people from the student assassinations ICU and FAPS will have priority in being able to attend if there are too many registrations.</il>
+                    <il>Insurence is the responsibility of the participants.</il>
 
-                    <il>Versicherung ist Sache der Teilnehmer.</il>
-                    <il>Alle Angaben ohne Gewähr</il>
                 </ul>
             </Container>
         )
