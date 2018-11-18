@@ -81,6 +81,10 @@ const RadiobuttonLabel = styled.label`
     margin: 0 .5rem 0 .5rem   
 `;
 
+const PriceText = styled.p`
+    
+`
+
 
 const ALERT_TIMEOUT = 4000;
 
@@ -98,7 +102,9 @@ class Infos extends Component {
                 faculty: 'ICU',
                 birthday: moment("1994-01-01"),
                 ticket: true,
-                vegetarian: false
+                vegetarian: false,
+                bedsheet: true,
+                beerglas: false,
             },
             registerCount: 0,
             maxRegistration: 0,
@@ -111,6 +117,7 @@ class Infos extends Component {
 
     async componentWillMount() {
         let counts = await fireBaseService.getMaxAndConductedRegistration();
+        console.log(counts);
         this.setState({
             registerCount: counts.registerCount,
             maxRegistration: counts.maxRegistration,
@@ -191,6 +198,19 @@ class Infos extends Component {
             profile:{...this.state.profile, vegetarian: state}
         })
     }
+
+    setBedSheet(state) {
+        this.setState({
+            profile:{...this.state.profile, bedsheet: state}
+        })
+    }
+
+    setBeerGlas(state) {
+        this.setState({
+            profile:{...this.state.profile, beerglas: state}
+        })
+    }
+
     toggleCalendar(e) {
         e && e.preventDefault();
         this.setState({datepickerIsOpen: !this.state.datepickerIsOpen})
@@ -205,7 +225,7 @@ class Infos extends Component {
     }
 
     async handleSubmit() {
-        let res = await fireBaseService.saveRegistration(this.state.profile);
+        let res = await fireBaseService.saveRegistration(this.state.profile, this.calculatePrice());
         if (!res) {
             this.showFailureAlert();
         } else {
@@ -219,7 +239,16 @@ class Infos extends Component {
         }
     }
 
+    calculatePrice() {
+        let basePrice = 250;
+        if(this.state.profile.faculty != 'ICU') basePrice += 150;
+        if(this.state.profile.ticket) basePrice += 200;
+        if(this.state.profile.bedsheet) basePrice += 10;
+        return basePrice;
+    }
+
     render() {
+        console.log(this.calculatePrice());
 
         if (this.state.loading) {
             return (
@@ -321,6 +350,35 @@ class Infos extends Component {
                                     No
                                 </RadiobuttonLabel>
                             </RadioButtonContainer>
+                            <br/>
+                            {/*Bedsheets*/}
+                            <FieldLabel>Do you want to order bedsheets for 10.- CHF? (Otherwise you have to bring your own bedsheets or sleeping bag):</FieldLabel>
+                            <RadioButtonContainer>
+                                <RadiobuttonLabel>
+                                    <input type="radio" name="bedsheet" value="yes" onChange={() => this.setBedSheet(true)} checked={this.state.profile.bedsheet}/>
+                                    Yes
+                                </RadiobuttonLabel>
+                                <RadiobuttonLabel>
+                                    <input type="radio" name="bedsheet" value="no" onChange={() => this.setBedSheet(false)} checked={!this.state.profile.bedsheet}/>
+                                    No
+                                </RadiobuttonLabel>
+                            </RadioButtonContainer>
+                            <br/>
+                            {/*Beer glas*/}
+                            <FieldLabel>The kitchen crew has the idea to order some beer glasses with a cool print of the winter weeks on it</FieldLabel>
+                            <FieldLabel>As we will organize beer, you can also buy a cool souvenir for this week. The cost will be around 10-15 CHF. Details will follow</FieldLabel>
+                            <FieldLabel>Are you interested in such a glas? :</FieldLabel>
+                            <RadioButtonContainer>
+                                <RadiobuttonLabel>
+                                    <input type="radio" name="beerglas" value="yes" onChange={() => this.setBeerGlas(true)} checked={this.state.profile.beerglas}/>
+                                    Yes
+                                </RadiobuttonLabel>
+                                <RadiobuttonLabel>
+                                    <input type="radio" name="beerglas" value="no" onChange={() => this.setBeerGlas(false)} checked={!this.state.profile.beerglas}/>
+                                    No
+                                </RadiobuttonLabel>
+                            </RadioButtonContainer>
+                            <PriceText> Your price: {this.calculatePrice()}</PriceText>
                             <ClickButton onClick={() => this.handleSubmit()}
                                          disabled={!this.state.inputValid}>Submit</ClickButton>
                         </div>
