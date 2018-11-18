@@ -68,7 +68,7 @@ class Infos extends Component {
 
 
             </Container>
-            
+
         )
     }
 }
