@@ -378,7 +378,7 @@ class Infos extends Component {
                                     No
                                 </RadiobuttonLabel>
                             </RadioButtonContainer>
-                            <PriceText> Your price: {this.calculatePrice()}</PriceText>
+                            <PriceText> Your price: {this.calculatePrice()} CHF</PriceText>
                             <ClickButton onClick={() => this.handleSubmit()}
                                          disabled={!this.state.inputValid}>Submit</ClickButton>
                         </div>

@@ -10,19 +10,17 @@ const Container = styled.div`
   box-sizing: border-box;
 `;
 
-
 class Infos extends Component {
-    render() {
+    render(){
         return (
             <Container>
                 <Titel2White>Information</Titel2White>
 
-                <p>From 10th to 16th February 2019 we are packing our skis and snowboards and are headed to <a href="https://www.anzere.ch">Anzère</a> for an exiting Winter Week!
-                    Next to an awesome accommodation and nice ski slopes, Flämmli and Werwölfe are also waiting for you, like always! ;‑)</p>
+                <p>From 10th to 16th February 2019 we are packing our skis and snowboards to head to Anzère for an exiting Winter Week! Next to an awesome accommodation and nice ski slopes, Flämmli and Werwölfe are also waiting for you, like they always do! ;‑)</p>
                 <p>It includes:
                     <ul>
-                        <li>Accommodation in the group lodging of the <a href="http://www.anzere-vacances.ch/groupes">Hotel Zodiaque</a> in Anzère right at the bottom of the ski slope</li>
-                        <li>Ski Ticket "Anzère"  for 7 days</li>
+                        <li>Accommodation in the group lodging of the <a href="http://www.anzere-vacances.ch/groupes">Hotel Zodiaque</a> in Anzère right at the end of the ski slopes</li>
+                        <li>Ski pass "Anzère" for 7 days</li>
                         <li>Journey by Bus from and to Zurich</li>
                         <li>Nourishing breakfast, delicious dinners and the opportunity to make sandwiches for lunch</li>
 
@@ -39,21 +37,20 @@ class Infos extends Component {
 
                 <p>The fine print:
                     <ul>
-                        <li>With your registration, you register for the entire week and pay the price accordingly. We are not providing the option of joining for half or individual days of the Winter Week</li>
+                        <li>With your registration, you register for the entire week and pay the price accordingly. We are not providing the option of joining for half or individual days for the Winter Week</li>
                         <li>Ski ticket:
                             <ul>
-                                <li>The ticket is included in the price and it is valid for 7 days, which includes the day of the arrival and departure.</li>
+                                <li>The ticket is included in the price and it is valid for 7 days, which includes the day of arrival and departure.</li>
                                 <li>It is NOT transferable</li>
                                 <li>If you do not wish to have a ticket, you can indicate this in your registration.</li>
                             </ul>
                         </li>
-                        <li>If you join the Winter Week, you will help out the organizing committee and kitchen team when needed.</li>
-                        <li>Every participant is takes care of their own skiing or snowboarding equipment.</li>
+                        <li>If you join the Winter Week, you need to help out the organizing committee and kitchen team if needed.</li>
+                        <li>Every participant takes care of his or her own skiing or snowboarding equipment.</li>
                         <li>We ask you to pay the required fees, latest 5 days after receiving the confirmation of your registration.</li>
-                        <li>In general, you should not count on getting a refund unless you have an extremely good reason in not being able to attend. Exams are not a good reason, since you should know this in advance.</li>
+                        <li>In general, you should not count on getting a refund unless you have a valid reason for not being able to attend. Exams are not a valid reason, since you should know the exam dates in advance.</li>
                         <li>In general, people from the student assassinations ICU and FAPS will have priority in being able to attend if there are too many registrations.</li>
-                        <li>Insurence is the responsibility of the participants.</li>
-
+                        <li>Insurance is the responsibility of the participants.</li>
                     </ul>
                 </p>
 
