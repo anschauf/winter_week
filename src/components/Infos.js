@@ -19,7 +19,7 @@ class Infos extends Component {
                 <p>From 10th to 16th February 2019 we are packing our skis and snowboards to head to Anzère for an exiting Winter Week! Next to an awesome accommodation and nice ski slopes, Flämmli and Werwölfe are also waiting for you, like they always do! ;‑)</p>
                 <p>It includes:
                     <ul>
-                        <li>Accommodation in the group lodging of the <a href="http://www.anzere-vacances.ch/groupes">Hotel Zodiaque</a> in Anzère right at the end of the ski slopes</li>
+                        <li>Accommodation in the group lodging of the <a tabindex='-1'href="http://www.anzere-vacances.ch/groupes">Hotel Zodiaque</a> in Anzère right at the end of the ski slopes</li>
                         <li>Ski pass "Anzère" for 7 days</li>
                         <li>Journey by Bus from and to Zurich</li>
                         <li>Nourishing breakfast, delicious dinners and the opportunity to make sandwiches for lunch</li>

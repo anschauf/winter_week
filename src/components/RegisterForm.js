@@ -292,24 +292,29 @@ class Infos extends Component {
                         <div>
                             {/*Firstname*/}
                             <FieldLabel>Firstname: </FieldLabel>
-                            <TextInput onChange={e => this.handleFirstNameChange(e)} value={this.state.profile.firstName}/>
+                            <TextInput onChange={e => this.handleFirstNameChange(e)}
+                                       value={this.state.profile.firstName} tabindex="1"/>
 
                             {/*Lastname*/}
                             <FieldLabel>Lastname: </FieldLabel>
-                            <TextInput onChange={e => this.handleLastNameChange(e)} value={this.state.profile.lastName} />
+                            <TextInput onChange={e => this.handleLastNameChange(e)}
+                                       value={this.state.profile.lastName} tabindex="2"/>
 
                             {/*Email address*/}
                             <FieldLabel>Email address: </FieldLabel>
-                            <TextInput onChange={e => this.handleEmailChange(e)} value={this.state.profile.email}/>
+                            <TextInput onChange={e => this.handleEmailChange(e)} value={this.state.profile.email}
+                                       tabindex="3"/>
 
                             {/*mobile number*/}
                             <FieldLabel>mobile number (during the Winter week): </FieldLabel>
-                            <TextInput onChange={e => this.handlePhoneNumberChange(e)} value={this.state.profile.phone}/>
+                            <TextInput onChange={e => this.handlePhoneNumberChange(e)} value={this.state.profile.phone}
+                                       tabindex="4"/>
 
                             {/*Faculty*/}
                             <FieldLabel>Fachverein Member:</FieldLabel>
                             <br/>
-                            <SelectField value={this.state.profile.faculty} onChange={e => this.handleFacultyChange(e)} value={this.state.profile.faculty}>
+                            <SelectField value={this.state.profile.faculty} onChange={e => this.handleFacultyChange(e)}
+                                         value={this.state.profile.faculty} tabindex="5">
                                 <option value='ICU'>ICU</option>
                                 <option value='FAPS'>FAPS</option>
                                 <option value='OTHER'>OTHER</option>
@@ -336,6 +341,7 @@ class Infos extends Component {
                                         inline
                                         minDate={moment('1980-01-01')}
                                         maxDate={moment('2006-12-31')}
+                                        tabindex="6"
                                     />
                                 )
                             }
