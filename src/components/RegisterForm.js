@@ -220,7 +220,7 @@ class Infos extends Component {
         if (!core.isNotEmpty(this.state.profile.firstName)) return false;
         if (!core.isNotEmpty(this.state.profile.lastName.length)) return false;
         if (!core.isNotEmpty(this.state.profile.email.length) || !core.isEmailAddress(this.state.profile.email)) return false;
-        if(!core.isNumber(this.state.profile.phone) || this.state.profile.phone.length < 8) return false;
+        if(!core.isPhoneNumber(this.state.profile.phone) || this.state.profile.phone.length < 8) return false;
         return true
     }
 
