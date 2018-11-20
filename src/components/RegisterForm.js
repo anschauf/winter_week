@@ -183,31 +183,31 @@ class Infos extends Component {
     }
 
     handleDateChange(date) {
-        this.setState({profile:{...this.state.profile, birthday: date}});
+        this.setState({profile: {...this.state.profile, birthday: date}});
         this.toggleCalendar()
     }
 
     setTicket(state) {
         this.setState({
-            profile:{...this.state.profile, ticket: state}
+            profile: {...this.state.profile, ticket: state}
         });
     }
 
     setVegetarian(state) {
         this.setState({
-            profile:{...this.state.profile, vegetarian: state}
+            profile: {...this.state.profile, vegetarian: state}
         })
     }
 
     setBedSheet(state) {
         this.setState({
-            profile:{...this.state.profile, bedsheet: state}
+            profile: {...this.state.profile, bedsheet: state}
         })
     }
 
     setBeerGlas(state) {
         this.setState({
-            profile:{...this.state.profile, beerglas: state}
+            profile: {...this.state.profile, beerglas: state}
         })
     }
 
@@ -220,7 +220,7 @@ class Infos extends Component {
         if (!core.isNotEmpty(this.state.profile.firstName)) return false;
         if (!core.isNotEmpty(this.state.profile.lastName.length)) return false;
         if (!core.isNotEmpty(this.state.profile.email.length) || !core.isEmailAddress(this.state.profile.email)) return false;
-        if(!core.isPhoneNumber(this.state.profile.phone) || this.state.profile.phone.length < 8) return false;
+        if (!core.isPhoneNumber(this.state.profile.phone) || this.state.profile.phone.length < 8) return false;
         return true
     }
 
@@ -233,17 +233,33 @@ class Infos extends Component {
             if (!countRes) {
                 this.showFailureAlert();
             } else {
-                this.setState({registerCount: (this.state.registerCount + 1)});
+                this.setState({
+                    registerCount: (this.state.registerCount + 1),
+                    profile: {
+                        ...this.state.profile,
+                        lastName: '',
+                        firstName: '',
+                        email: '',
+                        phone: '',
+                        faculty: 'ICU',
+                        birthday: moment("1994-01-01"),
+                        ticket: true,
+                        vegetarian: false,
+                        bedsheet: true,
+                        beerglas: false,
+                    },
+                });
                 this.showSuccessAlert();
             }
         }
     }
 
+
     calculatePrice() {
         let basePrice = 250;
-        if(this.state.profile.faculty != 'ICU') basePrice += 150;
-        if(this.state.profile.ticket) basePrice += 200;
-        if(this.state.profile.bedsheet) basePrice += 10;
+        if (this.state.profile.faculty != 'ICU') basePrice += 150;
+        if (this.state.profile.ticket) basePrice += 200;
+        if (this.state.profile.bedsheet) basePrice += 10;
         return basePrice;
     }
 
@@ -276,24 +292,24 @@ class Infos extends Component {
                         <div>
                             {/*Firstname*/}
                             <FieldLabel>Firstname: </FieldLabel>
-                            <TextInput onChange={e => this.handleFirstNameChange(e)}/>
+                            <TextInput onChange={e => this.handleFirstNameChange(e)} value={this.state.profile.firstName}/>
 
                             {/*Lastname*/}
                             <FieldLabel>Lastname: </FieldLabel>
-                            <TextInput onChange={e => this.handleLastNameChange(e)}/>
+                            <TextInput onChange={e => this.handleLastNameChange(e)} value={this.state.profile.lastName} />
 
                             {/*Email address*/}
                             <FieldLabel>Email address: </FieldLabel>
-                            <TextInput onChange={e => this.handleEmailChange(e)}/>
+                            <TextInput onChange={e => this.handleEmailChange(e)} value={this.state.profile.email}/>
 
                             {/*mobile number*/}
                             <FieldLabel>mobile number (during the Winter week): </FieldLabel>
-                            <TextInput onChange={e => this.handlePhoneNumberChange(e)}/>
+                            <TextInput onChange={e => this.handlePhoneNumberChange(e)} value={this.state.profile.phone}/>
 
                             {/*Faculty*/}
                             <FieldLabel>Fachverein Member:</FieldLabel>
                             <br/>
-                            <SelectField value={this.state.profile.faculty} onChange={e => this.handleFacultyChange(e)}>
+                            <SelectField value={this.state.profile.faculty} onChange={e => this.handleFacultyChange(e)} value={this.state.profile.faculty}>
                                 <option value='ICU'>ICU</option>
                                 <option value='FAPS'>FAPS</option>
                                 <option value='OTHER'>OTHER</option>
@@ -328,53 +344,70 @@ class Infos extends Component {
                             {/*Skiticket*/}
                             <FieldLabel>Do you need a Skiticket?:</FieldLabel>
                             <RadioButtonContainer>
-                            <RadiobuttonLabel>
-                                <input type="radio" name="ticket" value="yes" onChange={() => this.setTicket(true)} checked={this.state.profile.ticket}/>
-                                Yes
-                            </RadiobuttonLabel>
-                            <RadiobuttonLabel>
-                                <input type="radio" name="ticket" value="no" onChange={() => this.setTicket(false)} checked={!this.state.profile.ticket}/>
-                                No
-                            </RadiobuttonLabel>
+                                <RadiobuttonLabel>
+                                    <input type="radio" name="ticket" value="yes" onChange={() => this.setTicket(true)}
+                                           checked={this.state.profile.ticket}/>
+                                    Yes
+                                </RadiobuttonLabel>
+                                <RadiobuttonLabel>
+                                    <input type="radio" name="ticket" value="no" onChange={() => this.setTicket(false)}
+                                           checked={!this.state.profile.ticket}/>
+                                    No
+                                </RadiobuttonLabel>
                             </RadioButtonContainer>
                             <br/>
                             {/*Vegetarian*/}
                             <FieldLabel>Are you vegetarian?:</FieldLabel>
                             <RadioButtonContainer>
                                 <RadiobuttonLabel>
-                                    <input type="radio" name="vegetarian" value="yes" onChange={() => this.setVegetarian(true)} checked={this.state.profile.vegetarian}/>
+                                    <input type="radio" name="vegetarian" value="yes"
+                                           onChange={() => this.setVegetarian(true)}
+                                           checked={this.state.profile.vegetarian}/>
                                     Yes
                                 </RadiobuttonLabel>
                                 <RadiobuttonLabel>
-                                    <input type="radio" name="vegetarian" value="no" onChange={() => this.setVegetarian(false)} checked={!this.state.profile.vegetarian}/>
+                                    <input type="radio" name="vegetarian" value="no"
+                                           onChange={() => this.setVegetarian(false)}
+                                           checked={!this.state.profile.vegetarian}/>
                                     No
                                 </RadiobuttonLabel>
                             </RadioButtonContainer>
                             <br/>
                             {/*Bedsheets*/}
-                            <FieldLabel>Do you want to order bedsheets for 10.- CHF? (Otherwise you have to bring your own bedsheets or sleeping bag):</FieldLabel>
+                            <FieldLabel>Do you want to order bedsheets for 10.- CHF? (Otherwise you have to bring your
+                                own bedsheets or sleeping bag):</FieldLabel>
                             <RadioButtonContainer>
                                 <RadiobuttonLabel>
-                                    <input type="radio" name="bedsheet" value="yes" onChange={() => this.setBedSheet(true)} checked={this.state.profile.bedsheet}/>
+                                    <input type="radio" name="bedsheet" value="yes"
+                                           onChange={() => this.setBedSheet(true)}
+                                           checked={this.state.profile.bedsheet}/>
                                     Yes
                                 </RadiobuttonLabel>
                                 <RadiobuttonLabel>
-                                    <input type="radio" name="bedsheet" value="no" onChange={() => this.setBedSheet(false)} checked={!this.state.profile.bedsheet}/>
+                                    <input type="radio" name="bedsheet" value="no"
+                                           onChange={() => this.setBedSheet(false)}
+                                           checked={!this.state.profile.bedsheet}/>
                                     No
                                 </RadiobuttonLabel>
                             </RadioButtonContainer>
                             <br/>
                             {/*Beer glas*/}
-                            <FieldLabel>The kitchen crew has the idea to order some beer glasses with a cool print of the winter weeks on it</FieldLabel>
-                            <FieldLabel>As we will organize beer, you can also buy a cool souvenir for this week. The cost will be around 10-15 CHF. Details will follow</FieldLabel>
+                            <FieldLabel>The kitchen crew has the idea to order some beer glasses with a cool print of
+                                the winter weeks on it</FieldLabel>
+                            <FieldLabel>As we will organize beer, you can also buy a cool souvenir for this week. The
+                                cost will be around 10-15 CHF. Details will follow</FieldLabel>
                             <FieldLabel>Are you interested in such a glas? :</FieldLabel>
                             <RadioButtonContainer>
                                 <RadiobuttonLabel>
-                                    <input type="radio" name="beerglas" value="yes" onChange={() => this.setBeerGlas(true)} checked={this.state.profile.beerglas}/>
+                                    <input type="radio" name="beerglas" value="yes"
+                                           onChange={() => this.setBeerGlas(true)}
+                                           checked={this.state.profile.beerglas}/>
                                     Yes
                                 </RadiobuttonLabel>
                                 <RadiobuttonLabel>
-                                    <input type="radio" name="beerglas" value="no" onChange={() => this.setBeerGlas(false)} checked={!this.state.profile.beerglas}/>
+                                    <input type="radio" name="beerglas" value="no"
+                                           onChange={() => this.setBeerGlas(false)}
+                                           checked={!this.state.profile.beerglas}/>
                                     No
                                 </RadiobuttonLabel>
                             </RadioButtonContainer>
