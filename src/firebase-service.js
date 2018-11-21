@@ -37,7 +37,8 @@ export default {
             bedsheet: profile.bedsheet,
             beerglas: profile.beerglas,
             birthday: profile.birthday.format('YYYY-MM-DD'),
-            price: price
+            price: price,
+            email_confirmed: false
         }).then(res => {
             return true;
         }).catch(err => {
