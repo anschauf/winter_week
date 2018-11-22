@@ -249,6 +249,7 @@ class Infos extends Component {
                         beerglas: false,
                     },
                 });
+                this.handleInputValidity()
                 this.showSuccessAlert();
             }
         }
@@ -278,16 +279,6 @@ class Infos extends Component {
             return (
                 <Container>
                     <Titel2White>Registration</Titel2White>
-                    {this.state.successAlert &&
-                    <RegistrationAlert id='successAlert' theme={{bg: '#79c879'}}>
-                        Your registration has succesfully been accepted!
-                    </RegistrationAlert>
-                    }
-                    {this.state.failureAlert &&
-                    <RegistrationAlert id='failureAlert' theme={{bg: '#f9343b'}}>
-                        Registration was not successful!
-                    </RegistrationAlert>
-                    }
                     {(this.state.registerCount < this.state.maxRegistration) ? (
                         <div>
                             {/*Firstname*/}
@@ -418,6 +409,18 @@ class Infos extends Component {
                                 </RadiobuttonLabel>
                             </RadioButtonContainer>
                             <PriceText> Your price: {this.calculatePrice()} CHF</PriceText>
+
+                            {/*Registration alert */}
+                            {this.state.successAlert &&
+                            <RegistrationAlert id='successAlert' theme={{bg: '#79c879'}}>
+                                Your registration has succesfully been accepted!
+                            </RegistrationAlert>
+                            }
+                            {this.state.failureAlert &&
+                            <RegistrationAlert id='failureAlert' theme={{bg: '#f9343b'}}>
+                                Registration was not successful!
+                            </RegistrationAlert>
+                            }
                             <ClickButton onClick={() => this.handleSubmit()}
                                          disabled={!this.state.inputValid}>Submit</ClickButton>
                         </div>
