@@ -9,8 +9,8 @@ export default {
         return pattern.test(str);  // returns a boolean
     },
 
-    isNumber(str) {
-        var pattern = /^\d+$/;
+    isPhoneNumber(str) {
+        var pattern = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/;
         return pattern.test(str);  // returns a boolean
     }
 }

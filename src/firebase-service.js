@@ -24,7 +24,7 @@ export default {
         }
     },
 
-    async saveRegistration(profile) {
+    async saveRegistration(profile, price) {
         let newRegistrationRef = registrationRef.push();
         return newRegistrationRef.set({
             lastName: profile.lastName,
@@ -34,7 +34,11 @@ export default {
             phone: profile.phone,
             ticket: profile.ticket,
             vegetarian: profile.vegetarian,
-            birthday: profile.birthday.format('YYYY-MM-DD')
+            bedsheet: profile.bedsheet,
+            beerglas: profile.beerglas,
+            birthday: profile.birthday.format('YYYY-MM-DD'),
+            price: price,
+            email_confirmed: false
         }).then(res => {
             return true;
         }).catch(err => {
