@@ -10,16 +10,6 @@ const Container = styled.div`
   box-sizing: border-box;
 `;
 
-const Container2 = styled.div`
-  width: 100%
-  background-color: #8585ad
-  color: white;
-  padding: 2rem;
-  box-sizing: border-box;
-  font-size: 75%
-`;
-
-
 class Infos extends Component {
     render() {
         return (
