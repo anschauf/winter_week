@@ -28,7 +28,7 @@ class App extends Component {
                     <Titel></Titel>
                     <Mountain></Mountain>
                     <Infos></Infos>
-                    <RegisterForm></RegisterForm>
+                    {/*<RegisterForm></RegisterForm>*/}
                 </Wrapper>
             </FlexView>
         </BackgroundContainer>

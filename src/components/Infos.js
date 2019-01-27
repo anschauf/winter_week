@@ -21,6 +21,7 @@ const Container2 = styled.div`
 class Infos extends Component {
     render(){
         return (
+            <div>
             <Container>
                 <Titel2White>Anreise</Titel2White>
 
@@ -28,7 +29,7 @@ class Infos extends Component {
                     <ul>
                         <li>Treffpunkt um 7.00 Uhr am Carparkplatz Sihlquai</li>
                         <li>Abfahrt um 7.30 Uhr</li>
-                        <li>Ankuft in Anzere ca. 12 UhrJourney by Bus from and to Zurich</li>
+                        <li>Ankuft in Anzere ca. 12 Uhr, Journey by Bus from and to Zurich</li>
                         <li>Bei Anfunkt werden wir zuerst das Gepäck ins Hotel bringen und dann geht es gleich auf die Piste!</li>
                     </ul>
                 </p>
@@ -65,8 +66,6 @@ class Infos extends Component {
 
 			<Container2>
 
-
-
                 <Titel2White>Informationen zu Anzere</Titel2White>
 
                 <ul>
@@ -95,7 +94,7 @@ class Infos extends Component {
                 </ul>
 
             </Container2>
-            
+            </div>
 
         )
     }
