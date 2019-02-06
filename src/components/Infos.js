@@ -62,7 +62,6 @@ class Infos extends Component {
                     <li>Freitag 15.02: Pisten-Postenlauf</li>
 
                 </ul>
-s
 			</Container>
 
 			<Container2>
